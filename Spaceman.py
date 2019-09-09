@@ -4,12 +4,11 @@ def welcomeScreen():
     name = input("Enter your name: ")
     print("WELCOME" +" " + name + " " + "TO SPACEMANS LAUNCH PAD!" )
     print("################################################")
-    #Spaceman()
+
     print()
 welcomeScreen()
 
 def get_word():
-# def load_word():
     words = (["banjo","bagpipes","kiosk","zippy","quip","channel"])
     return random.choice(words).upper()
 
