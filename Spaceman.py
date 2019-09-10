@@ -10,8 +10,7 @@ def welcomeScreen():
     print()
 welcomeScreen()
 
-def get_word():
-
+def load_word():
     f = open("dictionary.txt",'r')
     words = f.readlines()
     f.close()
