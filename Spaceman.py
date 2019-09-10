@@ -1,6 +1,6 @@
 import random
 
-letters_guessed = []
+guesses = []
 
 def welcomeScreen():
     name = input("Enter your name: ")
@@ -43,8 +43,8 @@ def letter_in_word(guess,letter):
         print('Sorry. The word does not contain the letter ' + guess + '.')
         return status
 
-def get_word(guess,guesses,word):
-    guess = input(text)
+def get_word(guess,guesses):
+    guess = input('text')
     guess = guess.upper()
     if guess in guesses:
         print('You already guessed "' + guess + '"')
@@ -70,11 +70,13 @@ def get_word(guess,guesses,word):
 
 
 def main():
-
-    print('The word contains', len(word), 'letters.')
     while True:
+        guess = input("Enter a letter ")
+        get_word(guess,guesses)
+        check(word,guesses,guess)
+        letter_in_word(guess,letter)
+        print('The word contains'+ len(word)+ 'letters.')
         text = 'Please enter one letter or a ()-letter word. '.format(len(word))
-        guesses = []
         if guesses == True:
             print("Congratulations! You win.")
             print('Yes, the word is' + word + '! You got it in'+ len(guesses) + 'tries.')
