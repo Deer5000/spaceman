@@ -1,5 +1,7 @@
 import random
 
+letters_guessed = []
+
 def welcomeScreen():
     name = input("Enter your name: ")
     print("WELCOME" +" " + name + " " + "TO SPACEMANS LAUNCH PAD!" )
@@ -9,8 +11,16 @@ def welcomeScreen():
 welcomeScreen()
 
 def get_word():
-    words = (["banjo","bagpipes","kiosk","zippy","quip","channel"])
-    return random.choice(words).upper()
+
+    f = open("dictionary.txt",'r')
+    words = f.readlines()
+    f.close()
+    # return random.choice(words).upper()
+    words= words[0].split(' ')
+    word = random.choice(words).upper()
+    return word
+
+
 
 def check(word,guesses,guess):
     guess = guess.upper()
@@ -23,46 +33,57 @@ def check(word,guesses,guess):
         else:
             status += '*'
 
+def letter_in_word(guess,letter):
+
     if letter == guess:
         matches += 1
 
-    if matches > 1:
-        print('Yes! The word contains',matches,'"' + guess +'"' + 's')
-    elif matches == 1:
-        print('Yes! The word contains the letter "' + guess + '"')
+    if matches >= 1:
+        print('Yes! The word contains the letter '  + guess + '.')
     else:
-        print('Sorry. The word does not contain the letter "' + guess + '"')
-
+        print('Sorry. The word does not contain the letter ' + guess + '.')
         return status
 
-def main():
-    word = get_word()
-    guesses = []
-    guessed = False
-    print('The word contains', len(word), 'letters.')
-    while not guessed:
-        text = 'Please enter one letter or a ()-letter word. '.format(len(word))
-        guess = input(text)
-        guess = guess.upper()
-        if guess in guesses:
-            print('You already guessed "' + guess + '"')
-        elif len(guess) == len(word):
-            guesses.append(guess)
-            if guess == word:
-                guessed = True
-            else:
-                print('Sorry, that is incorrect.')
-        elif len(guess) == 1:
-            guesses.append(guess)
-            result = check(word,guesses,guess)
-            if result == word:
-                guessed = True
-
-            else:
-                print(result)
+def get_word(guess,guesses,word):
+    guess = input(text)
+    guess = guess.upper()
+    if guess in guesses:
+        print('You already guessed "' + guess + '"')
+    elif len(guess) == len(word):
+        guesses.append(guess)
+        if guess == word:
+            return False
         else:
-            print('invalid entry.')
-    print('Yes, the word is', word + '! You got it in', len(guesses), 'tries.')
+            print('Sorry, that is incorrect.')
+    elif len(guess) == 1:
+        guesses.append(guess)
+        result = check(word,guesses,guess)
+        if result == word:
+            return False
+
+        else:
+            print(result)
+    else:
+        print('invalid entry.')
+
+
+
+
+
+def main():
+
+    print('The word contains', len(word), 'letters.')
+    while True:
+        text = 'Please enter one letter or a ()-letter word. '.format(len(word))
+        guesses = []
+        if guesses == True:
+            print("Congratulations! You win.")
+            print('Yes, the word is' + word + '! You got it in'+ len(guesses) + 'tries.')
+        elif len(guesses) > 6:
+            print ("You Suck.")
+            print( 'The word is'+ word + '! You lost after' + len(guesses)+ 'tries.')
+        else:
+            print ("You've guessed "+len(guesses)+ " times out of 7.")
 main()
 
 
