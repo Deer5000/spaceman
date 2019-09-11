@@ -17,7 +17,7 @@ def load_word():
     f = open('dictionary.txt','r')
     words_list = f.readlines()
     f.close()
-    # return random.choice(words).upper()
+    # return random.choice(words)
     words_list= words_list[0].split(' ')
     word = random.choice(words_list)
     return word
