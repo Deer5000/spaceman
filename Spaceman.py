@@ -8,12 +8,16 @@ def is_word_guessed(word, letters_guessed):
             return False
     return True
 
+
 def welcomeScreen():
-    name = input("Enter your name: ")
+    #'''Welcome screen for the user'''
+    name = input(" Enter your name: ")
     print("WELCOME" +" " + name + " " + "TO SPACEMANS LAUNCH PAD!" )
     print("#################################################")
 
+
 def load_word():
+    #'''Gets random word from dictionary'''
     f = open('dictionary.txt','r')
     words_list = f.readlines()
     f.close()
@@ -92,9 +96,15 @@ def spaceman(word):
                 print(f"\nSorry guess again.\nYou have {tries + 1} incorrect guesses left!\nGuessed word so far: " + ''.join(get_guessed_word(word,letters_guessed)))
                 print("Letters available: " + ''.join(str(a) for a in word_bank) + "\n")
 
-welcomeScreen()
+#welcomeScreen()
 
-going = True
-while going:
-    spaceman(load_word())
-    going = try_again()
+if __name__ == '__main__':
+    going = True
+    while going:
+        spaceman(load_word())
+        going = try_again()
+
+
+#These function calls that will start the game
+#secret_word = load_word()
+#spaceman(secret_word)

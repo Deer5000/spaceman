@@ -1,0 +1,24 @@
+# test functions
+import spaceman
+
+
+	def test_word_guess():
+	    word = is_guess_in_word("a", "bag")
+	    # assert word == False, "It works!"
+	    if word == True:
+	        print("it works.")
+	    assert word == True, "it works"
+
+	def test_if_entire_word_guessed():
+	    word = is_word_guessed("words", "words")
+	    # assert word == False, "It works!"
+	    if word == True:
+	        print("it works.")
+	    else:
+	        print("still works, but all the words weren't guessed")
+	    assert word == True, "it works"
+
+	def test_if_random_word_generated():
+	    secret_word = load_word()
+	    a = print(secret_word)
+	    return a
